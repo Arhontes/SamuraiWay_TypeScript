@@ -1,5 +1,5 @@
 import React from 'react';
-import {postType} from "../MyPosts";
+import post from './Post.module.css'
 
 export type postTypes ={
     text:string
@@ -9,11 +9,14 @@ export type postTypes ={
 
 const Post = (props:postTypes) => {
     return (
-        <div>
-            <div>
-                {props.text}
-                <button onClick={()=>{props.deleteFunction(props.id)}}>x</button>
-            </div>
+        <div className={post.post}>
+
+                <div className={post.text}>
+                    {props.text}
+                </div>
+
+                <button className={post.button} onClick={()=>{props.deleteFunction(props.id)}}>x</button>
+
 
         </div>
     );

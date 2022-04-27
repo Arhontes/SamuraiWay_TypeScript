@@ -2,10 +2,11 @@
     grid-area:navBar;
     background-color: bisque;
     text-decoration: none;
+    padding: 15px;
 }
 
 .item{
-    background-color: black;
+
 }
 
 .active{

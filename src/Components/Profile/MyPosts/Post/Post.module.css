@@ -1,0 +1,15 @@
+.post{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid whitesmoke;
+    padding: 10px;
+}
+.text{
+    padding: 20px;
+    border-start-start-radius: 10px;
+    background-color: gray;
+}
+.button{
+    border-radius: 3px;
+    background-color:crimson;
+}
