@@ -1,0 +1,18 @@
+.profileInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border: 2px solid whitesmoke;
+    padding: 20px;
+}
+.profileInfo img{
+
+    width: 40px;
+    height: 40px;
+}
+.p{
+
+    text-align:center;
+    color: gold;
+    padding-left: 10px;
+}
