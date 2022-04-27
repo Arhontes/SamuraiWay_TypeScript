@@ -1,0 +1,14 @@
+.navBar{
+    grid-area:navBar;
+    background-color: bisque;
+    text-decoration: none;
+}
+
+.item{
+    background-color: black;
+}
+
+.active{
+    color: mediumturquoise;
+}
+

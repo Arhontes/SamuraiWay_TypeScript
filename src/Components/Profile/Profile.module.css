@@ -1,0 +1,13 @@
+.content{
+grid-area: content;
+    background-color: lightsteelblue;
+
+}
+
+.content img{
+    width:100%;
+    height: 400px;
+}
+.content .post{
+    padding-top: 10px;
+}
