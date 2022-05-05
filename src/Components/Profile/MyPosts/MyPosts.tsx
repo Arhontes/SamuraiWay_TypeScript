@@ -20,9 +20,6 @@ const MyPosts = () => {
         somePost = posts.filter((p)=>p.id!==id)
         setPosts(somePost)
     }
-    let someVariable = {
-        posts: posts,
-    }
 
     let listOfPosts = somePost.map( (p)=>{
         return <Post text={p.text} id={p.id} deleteFunction={deletePost}/>

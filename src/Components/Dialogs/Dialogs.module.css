@@ -1,0 +1,14 @@
+.two_column{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 20px;
+
+
+}
+.users{
+
+}
+.messages{
+    padding-left: 20px;
+
+}

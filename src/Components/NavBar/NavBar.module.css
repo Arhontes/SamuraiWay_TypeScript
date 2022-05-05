@@ -1,15 +1,14 @@
-.navBar{
+.nav_bar{
     grid-area:navBar;
     background-color: bisque;
-    text-decoration: none;
     padding: 15px;
 }
-
-.item{
-
+.nav_bar a{
+    text-decoration: none;
 }
-
 .active{
-    color: mediumturquoise;
+    color:darkgoldenrod;
 }
-
+.item{
+    color: black;
+}
