@@ -1,8 +1,8 @@
 import React from 'react';
 import p from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
-import NewPost from "./MyPosts/NewPost/NewPost";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPosts from "../MyPosts/MyPosts";
+import NewPost from "../MyPosts/NewPost/NewPost";
+import ProfileInfo from "../ProfileInfo/ProfileInfo";
 
 
 const Profile = () => {

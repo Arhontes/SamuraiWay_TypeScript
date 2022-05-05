@@ -1,5 +1,5 @@
 import React from 'react';
-import {MessagePropsType} from "../Dialogs";
+import {MessagePropsType} from "../Dialogs/Dialogs";
 
 const Message = (props:MessagePropsType) => {
     return (

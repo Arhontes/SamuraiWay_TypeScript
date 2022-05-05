@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import d from './Dialogs.module.css'
-import {User} from "./User/User";
+import {User} from "../User/User";
 import {message} from "antd";
-import Message from "./Message/Message";
+import Message from "../Message/Message";
 
 
 export type UserPropsType = {
