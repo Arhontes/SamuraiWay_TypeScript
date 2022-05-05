@@ -7,7 +7,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
     return (
-        <div className={p.content}>
+        <div>
 
             <div>
                 <img src="https://wallpaperaccess.com/full/3725741.jpg"/>

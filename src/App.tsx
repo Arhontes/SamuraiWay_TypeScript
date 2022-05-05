@@ -3,6 +3,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/Profile/Profile";
+import Dialogs from "./Components/Dialogs/Dialogs";
 
 
 function App() {
@@ -10,7 +11,11 @@ function App() {
         <div className={'app-wrapper'}>
             <Header />
             <NavBar />
-            <Profile />
+            {/*<Profile />*/}
+            <div className={'app-wrapper-content'}>
+                <Dialogs />
+            </div>
+
         </div>
     );
 }
