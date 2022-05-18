@@ -1,9 +1,8 @@
 import React from 'react';
-import { UserPropsType} from "../Dialogs/Dialogs";
 import {NavLink} from "react-router-dom";
-import post from "../../Profile/MyPosts/Post/Post";
+import {UserType} from "../../../Redux/state";
 
-export const User = (props:UserPropsType) => {
+export const User = (props:UserType) => {
     return (
         <div key={props.id}>
             <NavLink to={"/dialogs/"+ props.id}>{props.name}</NavLink>

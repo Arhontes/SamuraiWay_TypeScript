@@ -3,9 +3,13 @@ import p from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 import NewPost from "../MyPosts/NewPost/NewPost";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../../../Redux/state";
 
+ type ProfilePropsType={
+     profilePage:ProfilePageType
+ }
+const Profile = (props:ProfilePropsType) => {
 
-const Profile = () => {
     return (
         <div className={p.content}>
 
@@ -14,8 +18,8 @@ const Profile = () => {
             </div>
 
             <ProfileInfo/>
-            <NewPost/>
-            <MyPosts/>
+            <NewPost newPost={props.profilePage.newPost}/>
+            <MyPosts posts={props.profilePage.posts} />
 
         </div>
     );

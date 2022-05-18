@@ -5,9 +5,10 @@ import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/Profile/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs/Dialogs";
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {StateType} from "./Redux/state";
 
 
-function App() {
+function App({dialogsPage,profilePage}:StateType) {
     return (
 
         <BrowserRouter>
@@ -17,10 +18,10 @@ function App() {
 
                 <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path="/dialogs/*" element={<Dialogs />}/>
-                        <Route path="/profile" element={<Profile/>}/>
-                        <Route path="/news" element={<Profile/>}/>
-                        <Route path="/music" element={<Profile/>}/>
+                        <Route path="/dialogs/*" element={<Dialogs dialogsPage={dialogsPage}/>}/>
+                        <Route path="/profile" element={<Profile profilePage={profilePage}/>}/>
+                        {/*<Route path="/news" element={<Profile/>}/>
+                        <Route path="/music" element={<Profile/>}/>*/}
                     </Routes>
                 </div>
 

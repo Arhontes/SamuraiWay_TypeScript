@@ -1,7 +1,5 @@
-
-
 export type UserType = {
-    id:number, name:string
+    id: number, name: string
 }
 export type MessageType = {
     id: number,
@@ -9,15 +7,23 @@ export type MessageType = {
 
 }
 export type PostType = {
-    id:number, text:string
+    id: number, text: string
+}
+export type ProfilePageType = {
+    posts: Array<PostType>,
+    newPost: PostType
+}
+export type DialogsPageType={
+    users: Array<UserType>,
+    messages: Array<MessageType>
 }
 
 export type StateType = {
-    dialogsPage: {users:UserType[], messages:MessageType[]},
-    profilePage:{posts:PostType[], newPost:PostType}
+    dialogsPage: DialogsPageType,
+    profilePage: ProfilePageType
 }
 
-let state:StateType= {
+export let state: StateType = {
     dialogsPage: {
         users: [
             {id: 1, name: "John Watson"},
@@ -38,11 +44,11 @@ let state:StateType= {
     },
     profilePage: {
         posts: [
-            {id:1, text:"my first post"},
-            {id:2, text:"my second post"},
-            {id:3, text:"my third post"}
+            {id: 1, text: "my first post"},
+            {id: 2, text: "my second post"},
+            {id: 3, text: "my third post"}
         ],
-        newPost:{id:323, text:''}
+        newPost: {id: 323, text: ''}
     }
 }
 

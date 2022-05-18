@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {PostType} from "../../../Redux/state";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
 
-    let listOfPosts = .map( (p)=>{
-        return <Post text={p.text} id={p.id} deleteFunction={deletePost}/>
+type MyPostsPropsType ={
+    posts:PostType[]
+
+}
+const MyPosts = (props:MyPostsPropsType) => {
+
+    let listOfPosts = props.posts.map( (p)=>{
+        return <Post text={p.text} id={p.id} />
     })
     return (
         <div>

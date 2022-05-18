@@ -1,13 +1,9 @@
 import React from 'react';
 import post from './Post.module.css'
+import {PostType} from "../../../../Redux/state";
 
-export type postTypes ={
-    text:string
-    id:number
-    deleteFunction:(id:number)=> void
-}
 
-const Post = (props:postTypes) => {
+const Post = (props:PostType) => {
     return (
         <div className={post.post}>
 
@@ -15,7 +11,7 @@ const Post = (props:postTypes) => {
                     {props.text}
                 </div>
 
-                <button className={post.button} onClick={()=>{props.deleteFunction(props.id)}}>x</button>
+                <button className={post.button}>x</button>
 
 
         </div>
