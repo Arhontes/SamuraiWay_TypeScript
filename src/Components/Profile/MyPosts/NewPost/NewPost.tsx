@@ -7,14 +7,18 @@ type NewPostPropsType={
 }
 const NewPost = (props:NewPostPropsType) => {
 
+const AddPostHandler = ()=>{
+    let text = (document.getElementById('textArea')as HTMLTextAreaElement).value
+    if (text!==null){
+        alert(text)
+    }
+}
     return (
         <div className={np.input_area}>
-            <textarea>
+            <textarea id={"textArea"}>
 
             </textarea>
-            <button>
-                +
-            </button>
+            <button onClick={AddPostHandler}>+</button>
         </div>
     );
 };
