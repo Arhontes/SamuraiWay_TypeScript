@@ -3,7 +3,7 @@ export type UserType = {
 }
 export type MessageType = {
     id: number,
-    textOfMessage: string,
+    messageText: string,
 
 }
 export type PostType = {
@@ -34,12 +34,12 @@ export let state: StateType = {
             {id: 6, name: "Samsung Watson"}
         ],
         messages: [
-            {id: 1, textOfMessage: 'Hello!'},
-            {id: 2, textOfMessage: 'How are you!'},
-            {id: 3, textOfMessage: 'Do you mean?!'},
-            {id: 4, textOfMessage: "Let's settle this!"},
-            {id: 5, textOfMessage: 'Good evening!'},
-            {id: 6, textOfMessage: 'Good bye!'}
+            {id: 1, messageText: 'Hello!'},
+            {id: 2, messageText: 'How are you!'},
+            {id: 3, messageText: 'Do you mean?!'},
+            {id: 4, messageText: "Let's settle this!"},
+            {id: 5, messageText: 'Good evening!'},
+            {id: 6, messageText: 'Good bye!'}
         ]
     },
     profilePage: {
