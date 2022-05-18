@@ -49,7 +49,17 @@ export let state: StateType = {
             {id: 3, text: "my third post"}
         ],
         newPost: {id: 323, text: ''}
-    }
+    },
+
+
+
 }
 
-
+export const addPost =(postText:string)=>{
+    const addedPost:PostType = {...state.profilePage.newPost}
+    addedPost.text=postText
+    state.profilePage.posts.push(addedPost)
+    state.profilePage.newPost.id=postText.length;
+}
+console.log(state.profilePage.posts)
+console.log(state.profilePage.newPost.id)

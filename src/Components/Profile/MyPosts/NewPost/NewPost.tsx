@@ -4,15 +4,19 @@ import {PostType} from "../../../../Redux/state";
 
 type NewPostPropsType = {
     newPost: PostType
+    addPost: (props:string)=>void
 }
 const NewPost = (props: NewPostPropsType) => {
+
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
 
     const AddPostHandler = () => {
         let text = newPostElement.current?.value
         //let text = (document.getElementById('textArea') as HTMLTextAreaElement).value
-       alert(text)
+       if(text){
+           props.addPost(text)
+       }
     }
     return (
         <div className={np.input_area}>

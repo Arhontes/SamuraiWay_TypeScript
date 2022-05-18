@@ -22,7 +22,7 @@ const Dialogs = (props:DialogsPropsType) => {
 
             <div className={d.users}>
                 {props.dialogsPage.users.map((user)=>{return <User id={user.id} name={user.name}/>})}
-                <input ref={newMessageText} onKeyPress={addMessage} > </input>
+
             </div>
             <div className={d.messages}>
                 {props.dialogsPage.messages.map((message)=>{return <Message id={message.id} messageText={message.messageText}/>})}
