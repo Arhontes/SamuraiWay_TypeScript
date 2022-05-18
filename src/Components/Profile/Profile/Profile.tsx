@@ -14,7 +14,7 @@ const Profile = (props:ProfilePropsType) => {
         <div className={p.content}>
 
             <div className={p.wallpaper}>
-                <img src="https://wallpaperaccess.com/full/3725741.jpg"/>
+                <img src="https://wallpaperaccess.com/full/3725741.jpg" alt={""}/>
             </div>
 
             <ProfileInfo/>

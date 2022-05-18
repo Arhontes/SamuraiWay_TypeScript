@@ -4,7 +4,7 @@ import Header from './Components/Header/Header';
 import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/Profile/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs/Dialogs";
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {StateType} from "./Redux/state";
 
 
