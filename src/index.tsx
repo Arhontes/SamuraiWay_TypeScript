@@ -1,11 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import {state} from "./Redux/state";
+import rerenderEntireTree from "./rerender";
 
 
-
-ReactDOM.render(
-    <App profilePage={state.profilePage} dialogsPage={state.dialogsPage}/>, document.getElementById('root')
-);
+rerenderEntireTree()

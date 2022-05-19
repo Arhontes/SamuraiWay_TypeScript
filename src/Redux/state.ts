@@ -1,3 +1,6 @@
+import rerenderEntireTree from "../rerender";
+
+
 export type UserType = {
     id: number, name: string
 }
@@ -13,7 +16,7 @@ export type ProfilePageType = {
     posts: Array<PostType>,
     newPost: PostType
 }
-export type DialogsPageType={
+export type DialogsPageType = {
     users: Array<UserType>,
     messages: Array<MessageType>
 }
@@ -51,15 +54,13 @@ export let state: StateType = {
         newPost: {id: 323, text: ''}
     },
 
-
-
 }
 
-export const addPost =(postText:string)=>{
-    const addedPost:PostType = {...state.profilePage.newPost}
-    addedPost.text=postText
+export const addPost = (postText: string) => {
+    const addedPost: PostType = {...state.profilePage.newPost}
+    addedPost.text = postText
     state.profilePage.posts.push(addedPost)
-    state.profilePage.newPost.id=postText.length;
+    rerenderEntireTree()
 }
 console.log(state.profilePage.posts)
 console.log(state.profilePage.newPost.id)
