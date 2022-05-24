@@ -4,7 +4,8 @@ import {PostType} from "../../../../Redux/state";
 
 type NewPostPropsType = {
     newPost: PostType
-    addPost: (props:string)=>void
+    addPost: ()=>void
+    changeNewPostText:(text:string)=>void
 }
 const NewPost = (props: NewPostPropsType) => {
 
@@ -12,15 +13,17 @@ const NewPost = (props: NewPostPropsType) => {
 
 
     const AddPostHandler = () => {
+           props.addPost()
+    }
+    const onChangeHandler = ()=>{
+        console.log('invoke onChangeHandler')
         let text = newPostElement.current?.value
-        //let text = (document.getElementById('textArea') as HTMLTextAreaElement).value
-       if(text){
-           props.addPost(text)
-       }
+        text && props.changeNewPostText(text)
+
     }
     return (
         <div className={np.input_area}>
-            <textarea ref={newPostElement}>
+            <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPost.text}>
 
             </textarea>
             <button onClick={AddPostHandler}>+</button>
