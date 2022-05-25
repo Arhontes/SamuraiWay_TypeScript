@@ -1,4 +1,6 @@
-import rerenderEntireTree from "../rerender";
+let rerender=(props:StateType)=>{
+
+}
 
 
 export type UserType = {
@@ -60,10 +62,13 @@ export const addPost = () => {
     const addedPost: PostType = {...state.profilePage.newPost}
     state.profilePage.posts.push(addedPost)
     state.profilePage.newPost.text=''
-    rerenderEntireTree()
+    rerender(state)
 }
 
+export const subscribe=(observer:(state:StateType)=>void)=>{
+    rerender = observer;
+}
 export const updateNewPostText = (text:string)=>{
     state.profilePage.newPost.text = text
-    rerenderEntireTree()
+    rerender(state)
 }

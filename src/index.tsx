@@ -1,6 +1,14 @@
 import React from 'react';
 import './index.css';
-import rerenderEntireTree from "./rerender";
+import ReactDOM from "react-dom";
+import App from "./App";
+import {state, StateType, subscribe} from "./Redux/state";
 
+const rerenderEntireTree = (state:StateType) => {
+    ReactDOM.render(<App profilePage = {state.profilePage}
+                         dialogsPage = {state.dialogsPage}/> , document.getElementById('root')
+    )}
 
-rerenderEntireTree()
+subscribe(rerenderEntireTree)
+
+rerenderEntireTree(state)
