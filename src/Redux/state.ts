@@ -2,7 +2,6 @@ let rerender=(props:StateType)=>{
 
 }
 
-
 export type UserType = {
     id: number, name: string
 }
@@ -28,7 +27,7 @@ export type StateType = {
     profilePage: ProfilePageType
 }
 
-export let state: StateType = {
+/*export let state: StateType = {
     dialogsPage: {
         users: [
             {id: 1, name: "John Watson"},
@@ -56,8 +55,10 @@ export let state: StateType = {
         newPost: {id: 323, text: ''}
     },
 
-}
+}*/
 
+
+/*
 export const addPost = () => {
     const addedPost: PostType = {...state.profilePage.newPost}
     state.profilePage.posts.push(addedPost)
@@ -71,4 +72,54 @@ export const subscribe=(observer:(state:StateType)=>void)=>{
 export const updateNewPostText = (text:string)=>{
     state.profilePage.newPost.text = text
     rerender(state)
+}*/
+
+let store = {
+    _state: {
+        dialogsPage: {
+            users: [
+                {id: 1, name: "John Watson"},
+                {id: 2, name: "Mary Watson"},
+                {id: 3, name: "Alex Watson"},
+                {id: 4, name: "Benedict Watson"},
+                {id: 5, name: "Samson Watson"},
+                {id: 6, name: "Samsung Watson"}
+            ],
+            messages: [
+                {id: 1, messageText: 'Hello!'},
+                {id: 2, messageText: 'How are you!'},
+                {id: 3, messageText: 'Do you mean?!'},
+                {id: 4, messageText: "Let's settle this!"},
+                {id: 5, messageText: 'Good evening!'},
+                {id: 6, messageText: 'Good bye!'}
+            ]
+        },
+        profilePage: {
+            posts: [
+                {id: 1, text: "my first post"},
+                {id: 2, text: "my second post"},
+                {id: 3, text: "my third post"}
+            ],
+            newPost: {id: 323, text: ''}
+        },
+
+    },
+    rerender(props:StateType){},
+    addPost(){
+        const addedPost: PostType = {...this._state.profilePage.newPost}
+        this._state.profilePage.posts.push(addedPost)
+        this._state.profilePage.newPost.text=''
+        rerender(this._state)
+    },
+    updateNewPostText(text:string){
+        this._state.profilePage.newPost.text = text
+        rerender(this._state)
+    },
+    subscribe(observer:(state:StateType)=>void){
+        this.rerender = observer;
+    },
+    getState(){
+        return this._state
+    }
+
 }
