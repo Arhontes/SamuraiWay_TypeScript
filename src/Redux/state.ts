@@ -1,6 +1,6 @@
-let rerender=(props:StateType)=>{
+/*let rerender=(props:StateType)=>{
 
-}
+}*/
 
 export type UserType = {
     id: number, name: string
@@ -74,7 +74,7 @@ export const updateNewPostText = (text:string)=>{
     rerender(state)
 }*/
 
-let store = {
+export let store = {
     _state: {
         dialogsPage: {
             users: [
@@ -109,11 +109,11 @@ let store = {
         const addedPost: PostType = {...this._state.profilePage.newPost}
         this._state.profilePage.posts.push(addedPost)
         this._state.profilePage.newPost.text=''
-        rerender(this._state)
+        this.rerender(this._state)
     },
     updateNewPostText(text:string){
         this._state.profilePage.newPost.text = text
-        rerender(this._state)
+        this.rerender(this._state)
     },
     subscribe(observer:(state:StateType)=>void){
         this.rerender = observer;

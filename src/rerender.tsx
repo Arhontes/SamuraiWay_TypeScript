@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -10,3 +11,5 @@ const rerenderEntireTree = () => {
     dialogsPage = {state.dialogsPage}/> , document.getElementById('root')
 )}
 export default rerenderEntireTree
+*/
+export {}
