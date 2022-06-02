@@ -1,6 +1,7 @@
 import React from 'react';
 import np from './NewPost.module.css'
-import {ActionTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../../Redux/state";
+import {ActionTypes, addPostAC, updateNewPostTextAC} from "../../../../Redux/reducers/profile-page-reducer";
+
 
 type NewPostPropsType = {
     newPost: string

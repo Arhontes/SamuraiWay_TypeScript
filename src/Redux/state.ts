@@ -1,6 +1,4 @@
-//constants
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+import {ActionTypes, profilePageReducer} from "./reducers/profile-page-reducer";
 
 export type UserType = {
     id: number, name: string
@@ -25,24 +23,6 @@ export type StateType = {
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType
 }
-
-//ActionTypes
-type AddPostActionType = ReturnType<typeof addPostAC>
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-export type ActionTypes = AddPostActionType|UpdateNewPostTextActionType
-//Action creator
-export const addPostAC=(text:string)=>{
-    return {
-        type:ADD_POST,
-        newPostText:text
-    } as const
-}
-export const updateNewPostTextAC=(text:string)=>{
-    return {
-        type:UPDATE_NEW_POST_TEXT,
-        updatedText:text
-    } as const
-}
 export type StoreType = {
     _state: StateType,
     _callSubscriber: () => void,
@@ -50,7 +30,9 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionTypes) => void
 }
-export let store: StoreType = {
+
+
+export const store: StoreType = {
     _state: {
         dialogsPage: {
             users: [
@@ -89,22 +71,8 @@ export let store: StoreType = {
     getState() {return this._state},
 
     dispatch(action: ActionTypes) {
-        switch (action.type) {
-            case ADD_POST: {
-                const addedPost: PostType = {id: 23234, text: action.newPostText}
-                this._state.profilePage.posts.push(addedPost)
-                this._state.profilePage.newPost.text = ''
-                this._callSubscriber()
-            }
-                break;
-            case UPDATE_NEW_POST_TEXT: {
-                this._state.profilePage.newPost.text = action.updatedText
-                this._callSubscriber()
-            }
-                break;
-            default:
-                break;
-        }
-    }
+       profilePageReducer(this._state.profilePage, action)
 
+        this._callSubscriber()
+    }
 }

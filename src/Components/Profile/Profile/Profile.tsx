@@ -3,7 +3,8 @@ import p from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 import NewPost from "../MyPosts/NewPost/NewPost";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
-import {ActionTypes, ProfilePageType} from "../../../Redux/state";
+import { ProfilePageType} from "../../../Redux/state";
+import {ActionTypes} from "../../../Redux/reducers/profile-page-reducer";
 
  type ProfilePropsType={
      profilePage:ProfilePageType
