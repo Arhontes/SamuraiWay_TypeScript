@@ -19,7 +19,7 @@ function App({dialogsPage,profilePage}:StateType) {
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route path="/dialogs/*" element={<Dialogs dialogsPage={dialogsPage}/>}/>
-                        <Route path="/profile" element={<Profile profilePage={profilePage} addPost={store.addPost.bind(store)} changeNewPostText={store.updateNewPostText.bind(store)}/>}/>
+                        <Route path="/profile" element={<Profile profilePage={profilePage} dispatch={store.dispatch.bind(store)} />}/>
                     </Routes>
                 </div>
 

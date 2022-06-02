@@ -1,29 +1,32 @@
 import React from 'react';
 import np from './NewPost.module.css'
-import {PostType} from "../../../../Redux/state";
+import {ActionTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../../Redux/state";
 
 type NewPostPropsType = {
-    newPost: PostType
-    addPost: ()=>void
-    changeNewPostText:(text:string)=>void
+    newPost: string
+    dispatch: (action:ActionTypes)=>void
 }
+
+
 const NewPost = (props: NewPostPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
 
     const AddPostHandler = () => {
-           props.addPost()
+
+           props.dispatch(addPostAC(props.newPost))
     }
     const onChangeHandler = ()=>{
         console.log('invoke onChangeHandler')
-        let text = newPostElement.current?.value
-        text && props.changeNewPostText(text)
+        console.log(newPostElement.current?.value)
+        let changedText = newPostElement.current?.value
+        changedText && props.dispatch(updateNewPostTextAC(changedText))
 
     }
     return (
         <div className={np.input_area}>
-            <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPost.text}>
+            <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPost}>
 
             </textarea>
             <button onClick={AddPostHandler}>+</button>
