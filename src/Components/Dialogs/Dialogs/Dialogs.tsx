@@ -2,7 +2,7 @@ import React, {createRef} from 'react';
 import d from './Dialogs.module.css'
 import {User} from "../User/User";
 import Message from "../Message/Message";
-import {DialogsPageType} from "../../../Redux/state";
+import {DialogsPageType} from "../../../Redux/store";
 
 export type DialogsPropsType={
     dialogsPage: DialogsPageType,

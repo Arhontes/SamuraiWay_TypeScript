@@ -12,17 +12,19 @@ export type PostType = {
     id: number, text: string
 }
 export type ProfilePageType = {
-    posts: Array<PostType>,
-    newPost: PostType
+        posts: Array<PostType>,
+        newPost: PostType
 }
+
 export type DialogsPageType = {
-    users: Array<UserType>,
-    messages: Array<MessageType>
+        users: Array<UserType>,
+        messages: Array<MessageType>
 }
 export type StateType = {
-    dialogsPage: DialogsPageType,
-    profilePage: ProfilePageType
+    dialogsPage:DialogsPageType,
+    profilePage:ProfilePageType
 }
+/*
 export type StoreType = {
     _state: StateType,
     _callSubscriber: () => void,
@@ -30,7 +32,9 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionTypes) => void
 }
+*/
 
+/*
 
 export const store: StoreType = {
     _state: {
@@ -69,10 +73,9 @@ export const store: StoreType = {
     },
 
     getState() {return this._state},
+*/
 
-    dispatch(action: ActionTypes) {
+   /* dispatch(action: ActionTypes) {
        profilePageReducer(this._state.profilePage, action)
-
         this._callSubscriber()
-    }
-}
+    }*/
