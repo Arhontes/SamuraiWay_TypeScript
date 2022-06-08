@@ -7,10 +7,10 @@ import {StateType} from "./Redux/store";
 
 
 
+
 const rerenderEntireTree = (state:StateType) => {
     ReactDOM.render(<App dialogsPage={state.dialogsPage} profilePage={state.profilePage}  /> , document.getElementById('root')
     )}
 
 store.subscribe(()=>rerenderEntireTree(store.getState()))
-
 rerenderEntireTree(store.getState())

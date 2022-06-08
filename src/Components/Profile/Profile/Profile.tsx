@@ -5,6 +5,8 @@ import NewPost from "../MyPosts/NewPost/NewPost";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import { ProfilePageType} from "../../../Redux/store";
 import {ActionTypes} from "../../../Redux/reducers/profile-page-reducer";
+import NewPostContainer from "../MyPosts/NewPost/NewPostContainer";
+
 
  type ProfilePropsType={
      profilePage:ProfilePageType
@@ -21,7 +23,7 @@ const Profile = (props:ProfilePropsType) => {
             </div>
 
             <ProfileInfo />
-            <NewPost newPost={props.profilePage.newPost.text} dispatch={props.dispatch} />
+            <NewPostContainer newPostText={props.profilePage.newPost.text} dispatch={props.dispatch} />
             <MyPosts posts={props.profilePage.posts} />
 
         </div>

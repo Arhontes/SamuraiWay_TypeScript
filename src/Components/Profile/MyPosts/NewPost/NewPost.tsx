@@ -4,8 +4,9 @@ import {ActionTypes, addPostAC, updateNewPostTextAC} from "../../../../Redux/red
 
 
 type NewPostPropsType = {
-    newPost: string
-    dispatch: (action:ActionTypes)=>void
+    onChangePost:(changedText:string)=>void
+    onAddPost:(newPostText:string)=>void
+    value: string
 }
 
 
@@ -15,19 +16,19 @@ const NewPost = (props: NewPostPropsType) => {
 
 
     const AddPostHandler = () => {
-
-           props.dispatch(addPostAC(props.newPost))
+        const newPostText = newPostElement.current?.value
+        newPostText && props.onAddPost(newPostText)
     }
+
     const onChangeHandler = ()=>{
-        console.log('invoke onChangeHandler')
-        console.log(newPostElement.current?.value)
+
         let changedText = newPostElement.current?.value
-        changedText && props.dispatch(updateNewPostTextAC(changedText))
+        changedText && props.onChangePost(changedText)
 
     }
     return (
         <div className={np.input_area}>
-            <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPost}>
+            <textarea onChange={onChangeHandler} ref={newPostElement} value={props.value}>
 
             </textarea>
             <button onClick={AddPostHandler}>+</button>
