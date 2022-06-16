@@ -2,13 +2,17 @@ import React, {createRef} from 'react';
 import d from './Dialogs.module.css'
 import {User} from "../User/User";
 import Message from "../Message/Message";
-import {DialogsPageType} from "../../../Redux/store";
+import { MessageType, UserType} from "../../../Redux/store";
+import {connect} from "react-redux";
+import {AppStateType} from "../../../Redux/redux-store";
+import {Dispatch} from "redux";
 
 export type DialogsPropsType={
-    dialogsPage: DialogsPageType,
+    users:Array<UserType>,
+    messages:Array<MessageType>
 }
 
-const Dialogs = (props:DialogsPropsType) => {
+export const Dialogs = (props:DialogsPropsType) => {
 
     let newMessageText = createRef<HTMLInputElement>()
 
@@ -18,17 +22,42 @@ const Dialogs = (props:DialogsPropsType) => {
 
     }
     return (
-        <div className={d.two_column}>
+        <div className={d.two_column}>z
 
             <div className={d.users}>
-                {props.dialogsPage.users.map((user)=>{return <User id={user.id} name={user.name}/>})}
+
+                {props.users.map((user)=>{return <User id={user.id} name={user.name}/>})}
 
             </div>
             <div className={d.messages}>
-                {props.dialogsPage.messages.map((message)=>{return <Message id={message.id} messageText={message.messageText}/>})}
+                {props.messages.map((message)=>{return <Message id={message.id} messageText={message.messageText}/>})}
             </div>
         </div>
     );
 };
 
-export default Dialogs;
+
+/*
+export const DialogsContainer = ()=>{
+
+    return <Dialogs users={state.dialogsPage.users} messages={state.dialogsPage.messages}/>
+}
+*/
+type MapStatePropsType={
+    users:Array<UserType>,
+    messages:Array<MessageType>
+}
+let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
+
+    return{
+        users: state.dialogsPage.users,
+        messages:state.dialogsPage.messages,
+    }
+
+}
+let mapDispatchToProps = (dispatch:Dispatch)=>{
+    return{
+
+    }
+}
+export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);

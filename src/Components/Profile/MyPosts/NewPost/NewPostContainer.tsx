@@ -2,6 +2,10 @@ import React from 'react';
 import np from './NewPost.module.css'
 import {ActionTypes, addPostAC, updateNewPostTextAC} from "../../../../Redux/reducers/profile-page-reducer";
 import NewPost from "./NewPost";
+import {connect} from "react-redux";
+import {StateType} from "../../../../Redux/store";
+import {AppStateType} from "../../../../Redux/redux-store";
+import {Dispatch} from "redux";
 
 
 type NewPostContainerPropsType = {
@@ -10,23 +14,28 @@ type NewPostContainerPropsType = {
 
 }
 
-
-const NewPostContainer = (props: NewPostContainerPropsType) => {
-
-    const AddPostHandler = (newPostText:string) => {
-
-           props.dispatch(addPostAC(newPostText))
+type MapStatePropsType = {
+    value:string
+}
+type MapDispatchPropsType = {
+    onChangePost:(changedText:string)=>void
+    onAddPost:(newPostText:string)=>void
+}
+let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
+    return{
+        value:state.profilePage.newPost.text
     }
-
-    const onChangeHandler = (changedText:string)=>{
-
-       props.dispatch(updateNewPostTextAC(changedText))
-
+}
+let mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType=>{
+    return{
+        onChangePost: (changedText:string)=>{
+            dispatch( updateNewPostTextAC(changedText))
+        },
+        onAddPost:(newPostText:string)=>{
+            dispatch(addPostAC(newPostText))
+        }
     }
-    return (
-        <NewPost onChangePost={onChangeHandler} value={props.newPostText}  onAddPost={AddPostHandler}/>
-
-    );
-};
+}
+const NewPostContainer = connect(mapStateToProps,mapDispatchToProps)(NewPost)
 
 export default NewPostContainer;

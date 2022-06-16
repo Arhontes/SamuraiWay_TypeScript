@@ -15,7 +15,7 @@ const NewPost = (props: NewPostPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
 
-    const AddPostHandler = () => {
+    const addPostHandler = () => {
         const newPostText = newPostElement.current?.value
         newPostText && props.onAddPost(newPostText)
     }
@@ -31,7 +31,7 @@ const NewPost = (props: NewPostPropsType) => {
             <textarea onChange={onChangeHandler} ref={newPostElement} value={props.value}>
 
             </textarea>
-            <button onClick={AddPostHandler}>+</button>
+            <button onClick={addPostHandler}>+</button>
         </div>
     );
 };

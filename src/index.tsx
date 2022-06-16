@@ -4,12 +4,17 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import store from "./Redux/redux-store";
 import {StateType} from "./Redux/store";
+import {Provider} from "react-redux";
 
 
 
 
 const rerenderEntireTree = (state:StateType) => {
-    ReactDOM.render(<App dialogsPage={state.dialogsPage} profilePage={state.profilePage}  /> , document.getElementById('root')
+    ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>
+         , document.getElementById('root')
     )}
 
 store.subscribe(()=>rerenderEntireTree(store.getState()))

@@ -1,16 +1,18 @@
 import React from 'react';
 import p from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
-import NewPost from "../MyPosts/NewPost/NewPost";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
-import { ProfilePageType} from "../../../Redux/store";
-import {ActionTypes} from "../../../Redux/reducers/profile-page-reducer";
+import {PostType, ProfilePageType, StateType} from "../../../Redux/store";
+import {ActionTypes, updateNewPostTextAC} from "../../../Redux/reducers/profile-page-reducer";
 import NewPostContainer from "../MyPosts/NewPost/NewPostContainer";
+import {AppStateType} from "../../../Redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 
  type ProfilePropsType={
-     profilePage:ProfilePageType
-     dispatch: (action:ActionTypes)=>void
+
+     posts:Array<PostType>
 
  }
 const Profile = (props:ProfilePropsType) => {
@@ -23,11 +25,30 @@ const Profile = (props:ProfilePropsType) => {
             </div>
 
             <ProfileInfo />
-            <NewPostContainer newPostText={props.profilePage.newPost.text} dispatch={props.dispatch} />
-            <MyPosts posts={props.profilePage.posts} />
+            <NewPostContainer />
+            <MyPosts posts={props.posts} />
 
         </div>
     );
 };
+
+ type MapStatePropsType = {
+     posts:Array<PostType>
+ }
+
+let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
+
+    return{
+        posts:state.profilePage.posts
+    }
+
+}
+
+let mapDispatchToProps = (dispatch:Dispatch)=>{
+    return{
+
+    }
+}
+ export const ProfileContainer = connect(mapStateToProps,mapDispatchToProps)(Profile)
 
 export default Profile;
