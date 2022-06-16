@@ -7,10 +7,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/redux-store";
 import {Dispatch} from "redux";
 
-export type DialogsPropsType={
-    users:Array<UserType>,
-    messages:Array<MessageType>
-}
 
 export const Dialogs = (props:DialogsPropsType) => {
 
@@ -36,24 +32,19 @@ export const Dialogs = (props:DialogsPropsType) => {
     );
 };
 
-
-/*
-export const DialogsContainer = ()=>{
-
-    return <Dialogs users={state.dialogsPage.users} messages={state.dialogsPage.messages}/>
-}
-*/
 type MapStatePropsType={
     users:Array<UserType>,
     messages:Array<MessageType>
 }
-let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
+type MapDispatchPropsType = {
 
+}
+export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
+let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
     return{
         users: state.dialogsPage.users,
         messages:state.dialogsPage.messages,
     }
-
 }
 let mapDispatchToProps = (dispatch:Dispatch)=>{
     return{

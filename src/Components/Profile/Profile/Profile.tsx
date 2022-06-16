@@ -2,19 +2,13 @@ import React from 'react';
 import p from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
-import {PostType, ProfilePageType, StateType} from "../../../Redux/store";
-import {ActionTypes, updateNewPostTextAC} from "../../../Redux/reducers/profile-page-reducer";
+import {PostType} from "../../../Redux/store";
+
 import NewPostContainer from "../MyPosts/NewPost/NewPostContainer";
 import {AppStateType} from "../../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-
- type ProfilePropsType={
-
-     posts:Array<PostType>
-
- }
 const Profile = (props:ProfilePropsType) => {
 
     return (
@@ -35,7 +29,10 @@ const Profile = (props:ProfilePropsType) => {
  type MapStatePropsType = {
      posts:Array<PostType>
  }
+type MapDispatchPropsType = {
 
+}
+export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
 
     return{

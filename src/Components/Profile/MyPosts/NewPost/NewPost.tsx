@@ -1,13 +1,7 @@
 import React from 'react';
 import np from './NewPost.module.css'
 import {ActionTypes, addPostAC, updateNewPostTextAC} from "../../../../Redux/reducers/profile-page-reducer";
-
-
-type NewPostPropsType = {
-    onChangePost:(changedText:string)=>void
-    onAddPost:(newPostText:string)=>void
-    value: string
-}
+import {NewPostPropsType} from "./NewPostContainer";
 
 
 const NewPost = (props: NewPostPropsType) => {

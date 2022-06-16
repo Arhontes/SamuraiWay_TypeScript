@@ -36,6 +36,7 @@ let mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType=>{
         }
     }
 }
+export type NewPostPropsType = MapStatePropsType & MapDispatchPropsType
 const NewPostContainer = connect(mapStateToProps,mapDispatchToProps)(NewPost)
 
 export default NewPostContainer;
