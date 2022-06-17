@@ -8,6 +8,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import store from "./Redux/redux-store";
 import {StateType} from "./Redux/store";
 import {Users} from "./Components/Users/Users";
+import {UsersContainer} from "./Components/Users/UsersContainer";
 
 
 
@@ -24,7 +25,7 @@ function App() {
                     <Routes>
                         <Route path="/dialogs/*" element={<DialogsContainer />}/>
                         <Route path="/profile" element={<ProfileContainer />}/>
-                        <Route path="/users/*" element={ <Users/>}/>
+                        <Route path="/users/*" element={ <UsersContainer/>}/>
                     </Routes>
                 </div>
 

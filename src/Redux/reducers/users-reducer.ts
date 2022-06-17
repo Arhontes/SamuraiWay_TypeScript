@@ -19,7 +19,7 @@ export type UsersType = {
 
 export type ActionTypes =
     ReturnType<typeof followAC> |
-    ReturnType<typeof setUsers>
+    ReturnType<typeof setUsersAC>
 
 
 //Action creator
@@ -31,7 +31,7 @@ export const followAC = (userID:string) => {
         }
     } as const
 }
-export const setUsers = (users:Array<UserType>) => {
+export const setUsersAC = (users:Array<UserType>) => {
     return {
         type: "SET-USERS",
         payload:{

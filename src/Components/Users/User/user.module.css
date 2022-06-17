@@ -1,0 +1,23 @@
+.userContainer{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+    max-width: 400px;
+}
+.userContainer img{
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50px;
+    align-self: center;
+    margin:3px ;
+}
+.icoWithButton{
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+
+}
