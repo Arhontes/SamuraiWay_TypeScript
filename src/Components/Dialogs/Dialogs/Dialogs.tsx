@@ -18,7 +18,7 @@ export const Dialogs = (props:DialogsPropsType) => {
 
     }
     return (
-        <div className={d.two_column}>z
+        <div className={d.two_column}>
 
             <div className={d.users}>
 
