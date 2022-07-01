@@ -11,13 +11,17 @@ export type UserType = {
 }
 export type UsersType = {
     users: Array<UserType>,
-
+    totalCount:number
+    usersCountOnPage:number
+    currentPage:number
 }
 //ActionTypes
 
 export type ActionTypes =
     ReturnType<typeof followAC> |
-    ReturnType<typeof setUsersAC>
+    ReturnType<typeof setUsersAC>|
+    ReturnType<typeof setTotalCountAC>|
+    ReturnType<typeof setCurrentPageAC>
 
 
 //Action creator
@@ -37,12 +41,30 @@ export const setUsersAC = (users:Array<UserType>) => {
         }
     } as const
 }
+export const setTotalCountAC = (totalCount:number) => {
+    return {
+        type: "SET-TOTAL-COUNT",
+        payload:{
+           totalCount
+        }
+    } as const
+}
+export const setCurrentPageAC = (currentPage:number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        payload:{
+            currentPage
+        }
+    } as const
+}
 
 
 let initialState: UsersType = {
     users: [
     ],
-
+    totalCount:0,
+    usersCountOnPage:5,
+    currentPage:1,
 }
 export const usersReducer = (state = initialState, action: ActionTypes): UsersType => {
     switch (action.type) {
@@ -53,6 +75,10 @@ export const usersReducer = (state = initialState, action: ActionTypes): UsersTy
             }
         case "SET-USERS":
             return {...state,users:action.payload.users}
+        case "SET-TOTAL-COUNT":
+            return {...state,totalCount:action.payload.totalCount}
+        case "SET-CURRENT-PAGE":
+            return {...state,currentPage:action.payload.currentPage}
         default:
             break;
     }
