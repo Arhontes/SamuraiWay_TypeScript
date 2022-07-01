@@ -7,7 +7,6 @@ import  {DialogsContainer} from "./Components/Dialogs/Dialogs/Dialogs";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import store from "./Redux/redux-store";
 import {StateType} from "./Redux/store";
-import {Users} from "./Components/Users/Users";
 import {UsersContainer} from "./Components/Users/UsersContainer";
 
 

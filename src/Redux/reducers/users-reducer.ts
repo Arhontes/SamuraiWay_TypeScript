@@ -1,15 +1,13 @@
-import {v1} from "uuid";
-
 
 export type UserType = {
-    id: string
-    fullName: string
+    id: number
+    name: string
     status: string
-    location: {
-        city: string
-        country: string
-    },
     followed:boolean,
+    photos:{
+        small:string,
+        large:string
+    }
 }
 export type UsersType = {
     users: Array<UserType>,
@@ -23,7 +21,7 @@ export type ActionTypes =
 
 
 //Action creator
-export const followAC = (userID:string) => {
+export const followAC = (userID:number) => {
     return {
         type: "CHANGE-FOLLOWED",
         payload:{
@@ -43,37 +41,6 @@ export const setUsersAC = (users:Array<UserType>) => {
 
 let initialState: UsersType = {
     users: [
-       /* {
-            id: v1(),
-            fullName: "Alex Shepard",
-            status: "I live in Disgardium",
-            location: {
-                city: 'Kenema',
-                country: 'America'
-            },
-            followed:true,
-        },
-        {
-            id: v1(),
-            fullName: "Alex Betke",
-            status: "Just keep learning",
-            location: {
-                city: 'Onega',
-                country: 'Russia'
-            },
-            followed:true,
-        },
-        {
-            id: v1(),
-            fullName: "Alex Ivanov",
-            status: "I am stupid guy",
-            location: {
-                city: 'Kenema',
-                country: 'America'
-            },
-            followed:true,
-        },*/
-
     ],
 
 }
