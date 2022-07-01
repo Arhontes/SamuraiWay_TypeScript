@@ -13,21 +13,26 @@ class UserClass extends Component<UsersPropsType, {}> {
                 })
         }
     }
+    getNewPage = (page:number)=>{
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.countOnPage}`)
+            .then(response=>{
+                this.props.setUsers(response.data.items)})
+    }
     render() {
         const pageCount = Math.ceil(this.props.totalCount/this.props.countOnPage)
-        const pages = []
-        const getNewPage = (page:number)=>{
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.countOnPage}`)
-                .then(response=>{
-                    this.props.setCurrentPage(page)
-                    this.props.setUsers(response.data.items)})
-        }
+        let pages:Array<number> = []
+
         for (let i = 1; i <= pageCount; i++) {
-            pages.push(<span key = {i} className={this.props.currentPage===i?s.active:""} onClick={()=>getNewPage(i)}>{i}</span>)
+            pages = [...pages,i]
         }
+        let curP = this.props.currentPage;
+        let curPF = ((curP - 5) < 0) ?  0  : curP - 5 ;
+        let curPL = curP + 5;
+        let slicedPages = pages.slice( curPF, curPL);
         return (
             <div>
-                {pages}
+                {slicedPages.map(page=><span key = {page} className={this.props.currentPage===page?s.active:s.unActive} onClick={()=>this.getNewPage(page)}>{page}</span>)}
                 {this.props.users.map(el =>
                     <User id={el.id}
                           changeFollow={this.props.changeFollowed}

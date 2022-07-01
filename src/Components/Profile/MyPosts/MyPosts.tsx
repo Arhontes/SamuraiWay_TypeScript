@@ -9,8 +9,8 @@ type MyPostsPropsType ={
 }
 const MyPosts = (props:MyPostsPropsType) => {
 
-    let listOfPosts = props.posts.map( (p)=>{
-        return <Post text={p.text} id={p.id} />
+    let listOfPosts = props.posts.map( (p,index)=>{
+        return <Post key={p.id} text={p.text} id={p.id} />
     })
     return (
         <div>
