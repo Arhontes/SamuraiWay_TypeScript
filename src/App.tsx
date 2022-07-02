@@ -2,11 +2,9 @@ import React from 'react';
 import './App.css';
 import Header from './Components/Header/Header';
 import NavBar from "./Components/NavBar/NavBar";
-import Profile, {ProfileContainer} from "./Components/Profile/Profile/Profile";
+import {ProfileContainer} from "./Components/Profile/Profile/Profile";
 import  {DialogsContainer} from "./Components/Dialogs/Dialogs/Dialogs";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import store from "./Redux/redux-store";
-import {StateType} from "./Redux/store";
 import {UsersContainer} from "./Components/Users/UsersContainer";
 
 

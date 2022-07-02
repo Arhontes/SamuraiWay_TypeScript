@@ -7,7 +7,7 @@ import UserClass from "./UserClass";
 type MapStatePropsType = {
     users: Array<UserType>
     totalCount:number
-    countOnPage:number
+    usersCountOnPage:number
     currentPage:number
 }
 type MapDispatchPropsType = {
@@ -16,11 +16,13 @@ type MapDispatchPropsType = {
     setTotalCount:(totalCount:number)=>void
     setCurrentPage: (currentPage:number)=>void
 }
+export type UsersClassPropsType = MapStatePropsType & MapDispatchPropsType
+
 const mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
         users: state.users.users,
         totalCount:state.users.totalCount,
-        countOnPage:state.users.usersCountOnPage,
+        usersCountOnPage:state.users.usersCountOnPage,
         currentPage:state.users.currentPage
     }
 }
@@ -40,5 +42,5 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
         }
     }
 }
-export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
+
 export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserClass)
