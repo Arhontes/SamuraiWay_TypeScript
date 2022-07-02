@@ -7,7 +7,6 @@ import {
     UserType
 } from "../../Redux/reducers/users-reducer";
 import {AppStateType} from "../../Redux/redux-store";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import UserClass from "./UserClass";
 

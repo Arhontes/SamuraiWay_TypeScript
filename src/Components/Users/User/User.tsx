@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserType} from "../../../Redux/reducers/users-reducer";
 import s from "./user.module.css"
+import {NavLink} from "react-router-dom";
 type UserPropsType = UserType&{
     changeFollow:(id:number)=>void
 }
@@ -13,7 +14,10 @@ function User(props:UserPropsType) {
     return (
         <div className={s.userContainer}>
             <div className={s.icoWithButton}>
-                <img src={imgSource} alt=""/>
+                <NavLink to={'/profile/' + props.id}>
+                    <img src={imgSource} alt=""/>
+                </NavLink>
+
                 <button onClick={changeFollowHandler}>{props.followed?"Unfollow":"Follow"}</button>
             </div>
             <div>
