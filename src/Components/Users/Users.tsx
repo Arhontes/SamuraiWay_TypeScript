@@ -10,6 +10,7 @@ type UsersPropsType = {
     changeFollowed: (userID: number) => void
     totalCount: number
     usersCountOnPage: number
+    isFetching:boolean
 }
 
 export const Users = (props: UsersPropsType) => {

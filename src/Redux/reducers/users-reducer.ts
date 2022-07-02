@@ -14,6 +14,7 @@ export type UsersType = {
     totalCount:number
     usersCountOnPage:number
     currentPage:number
+    isFetching:boolean
 }
 //ActionTypes
 
@@ -21,7 +22,8 @@ export type ActionTypes =
     ReturnType<typeof followAC> |
     ReturnType<typeof setUsersAC>|
     ReturnType<typeof setTotalCountAC>|
-    ReturnType<typeof setCurrentPageAC>
+    ReturnType<typeof setCurrentPageAC>|
+    ReturnType<typeof toggleIsFetchingAC>
 
 
 //Action creator
@@ -57,6 +59,14 @@ export const setCurrentPageAC = (currentPage:number) => {
         }
     } as const
 }
+export const toggleIsFetchingAC = (isFetching:boolean) => {
+    return {
+        type: "CHANGE-IS-FETCHING",
+        payload:{
+            isFetching
+        }
+    } as const
+}
 
 
 let initialState: UsersType = {
@@ -65,6 +75,7 @@ let initialState: UsersType = {
     totalCount:0,
     usersCountOnPage:5,
     currentPage:1,
+    isFetching:false
 }
 export const usersReducer = (state = initialState, action: ActionTypes): UsersType => {
     switch (action.type) {
@@ -79,6 +90,8 @@ export const usersReducer = (state = initialState, action: ActionTypes): UsersTy
             return {...state,totalCount:action.payload.totalCount}
         case "SET-CURRENT-PAGE":
             return {...state,currentPage:action.payload.currentPage}
+        case "CHANGE-IS-FETCHING":
+            return {...state,isFetching:action.payload.isFetching}
         default:
             break;
     }
