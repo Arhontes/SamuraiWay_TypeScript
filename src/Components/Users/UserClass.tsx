@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {UsersClassPropsType} from "./UsersContainer";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from "../../assets/images/Spinner-1s-200px.svg"
 import {Preloader} from "../Common/Preloader/Preloader";
 class UserClass extends Component<UsersClassPropsType, {}> {
+
     componentDidMount() {
         this.props.toggleIsFetching(true)
         if (this.props.users.length === 0) {
@@ -29,6 +29,7 @@ class UserClass extends Component<UsersClassPropsType, {}> {
     }
 
     render() {
+        console.log(this.props.setTotalCount.toString())
         return (<>
                 {this.props.isFetching? <Preloader/>:
             <Users

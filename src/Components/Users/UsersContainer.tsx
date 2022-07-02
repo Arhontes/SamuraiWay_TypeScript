@@ -36,7 +36,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {
         isFetching:state.users.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
+/*const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
     return {
         changeFollowed: (userID: number) => {
             dispatch(followAC(userID))
@@ -54,6 +54,12 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
           dispatch(toggleIsFetchingAC(isFetching))
         }
     }
-}
+}*/
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserClass)
+export const UsersContainer = connect(mapStateToProps, {
+    changeFollowed: followAC,
+    setUsers:setUsersAC,
+    setTotalCount:setTotalCountAC,
+    setCurrentPage:setCurrentPageAC,
+    toggleIsFetching:toggleIsFetchingAC
+})(UserClass)
