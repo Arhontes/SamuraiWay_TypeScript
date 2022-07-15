@@ -14,5 +14,4 @@ const rootReducer = combineReducers({
 })
 
  let store = legacy_createStore(rootReducer)
-
 export default store
