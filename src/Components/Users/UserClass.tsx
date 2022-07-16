@@ -25,12 +25,22 @@ class UserClass extends Component<UsersClassPropsType, {}> {
                 this.props.setUsers(data.items)
             })
     }
-
+    changeFollow = (userID: number,followed: boolean) => {
+        this.props.toggleFollowingInProgress(true)
+        usersAPI.changeFollowed(userID, followed).then(resultCode => {
+            if (resultCode === 0) {
+                this.props.changeFollowed(userID)
+                this.props.toggleFollowingInProgress(false)
+            }
+        })
+    }
     render() {
         console.log(this.props.setTotalCount.toString())
         return (<>
                 {this.props.isFetching? <Preloader/>:
             <Users
+                changeFollow={this.changeFollow}
+                followingInProgress={this.props.followingInProgress}
                 isFetching={this.props.isFetching}
                 totalCount={this.props.totalCount}
                 usersCountOnPage={this.props.usersCountOnPage}

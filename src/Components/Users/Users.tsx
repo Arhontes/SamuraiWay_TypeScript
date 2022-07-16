@@ -2,8 +2,6 @@ import React from 'react';
 import User from "./User/User";
 import s from "./users.module.css";
 import {UserType} from "../../Redux/reducers/users-reducer";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -13,6 +11,8 @@ type UsersPropsType = {
     totalCount: number
     usersCountOnPage: number
     isFetching: boolean
+    followingInProgress:boolean
+    changeFollow:(userID:number,follow:boolean)=>void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -29,11 +29,7 @@ export const Users = (props: UsersPropsType) => {
     let curPL = curP + 5;
     let slicedPages = pages.slice(curPF, curPL);
 
-    const changeFollowHandler = (followed: boolean, userID: number) => {
-        usersAPI.changeFollowed(userID, followed).then(resultCode => {
-            if (resultCode === 0) props.changeFollowed(userID)
-        })
-    }
+
 
     return (
 
@@ -42,8 +38,10 @@ export const Users = (props: UsersPropsType) => {
             {slicedPages.map(page => <span key={page} className={props.currentPage === page ? s.active : s.unActive}
                                            onClick={() => props.getNewPage(page)}>{page}</span>)}
             {props.users.map(el =>
-                <User id={el.id}
-                      changeFollow={changeFollowHandler}
+                <User
+                      followDisabled={props.followingInProgress}
+                      id={el.id}
+                      changeFollow={props.changeFollow}
                       followed={el.followed}
                       name={el.name}
                       status={el.status}
