@@ -7,12 +7,11 @@ type UsersPropsType = {
     users: Array<UserType>
     currentPage: number
     getNewPage: (page: number) => void
-    changeFollowed: (userID: number) => void
+
     totalCount: number
     usersCountOnPage: number
     isFetching: boolean
-    followingInProgress:boolean
-    changeFollow:(userID:number,follow:boolean)=>void
+    changeFollow: (userID: number, follow: boolean) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -29,8 +28,6 @@ export const Users = (props: UsersPropsType) => {
     let curPL = curP + 5;
     let slicedPages = pages.slice(curPF, curPL);
 
-
-
     return (
 
         <div>
@@ -39,14 +36,14 @@ export const Users = (props: UsersPropsType) => {
                                            onClick={() => props.getNewPage(page)}>{page}</span>)}
             {props.users.map(el =>
                 <User
-                      followDisabled={props.followingInProgress}
-                      id={el.id}
-                      changeFollow={props.changeFollow}
-                      followed={el.followed}
-                      name={el.name}
-                      status={el.status}
-                      key={el.id}
-                      photos={el.photos}
+                    followingInProgress={el.followingInProgress}
+                    id={el.id}
+                    changeFollow={props.changeFollow}
+                    followed={el.followed}
+                    name={el.name}
+                    status={el.status}
+                    key={el.id}
+                    photos={el.photos}
                 />)}
         </div>
     );

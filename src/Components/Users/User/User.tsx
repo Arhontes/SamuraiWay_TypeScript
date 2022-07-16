@@ -5,7 +5,6 @@ import {NavLink} from "react-router-dom";
 
 type UserPropsType = UserType & {
     changeFollow: (userID: number,followed: boolean) => void
-    followDisabled:boolean
 }
 
 function User(props: UserPropsType) {
@@ -19,7 +18,7 @@ function User(props: UserPropsType) {
                     <img src={imgSource} alt=""/>
                 </NavLink>
 
-                <button disabled={props.followDisabled}
+                <button disabled={props.followingInProgress}
                     onClick={() => props.changeFollow(props.id,props.followed )}>{props.followed ? "Unfollow" : "Follow"}</button>
             </div>
             <div>
