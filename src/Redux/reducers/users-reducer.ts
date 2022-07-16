@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../../api/api";
+
 export type UserType = {
     id: number
     name: string
@@ -7,7 +10,6 @@ export type UserType = {
         small: string,
         large: string
     }
-} & {
     followingInProgress: boolean
 }
 export type UsersReducerType = {
@@ -16,7 +18,6 @@ export type UsersReducerType = {
     usersCountOnPage: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
 }
 //ActionTypes
 
@@ -70,10 +71,11 @@ export const toggleIsFetchingAC = (isFetching: boolean) => {
         }
     } as const
 }
-export const toggleFollowingInProgressAC = (following: boolean) => {
+export const toggleFollowingInProgressAC = (userID: number, following: boolean) => {
     return {
         type: "TOGGLE-FOLLOWING-IN-PROGRESS",
         payload: {
+            userID,
             following
         }
     } as const
@@ -85,7 +87,6 @@ let initialState: UsersReducerType = {
     usersCountOnPage: 5,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false,
 
 }
 export const usersReducer = (state = initialState, action: ActionTypes): UsersReducerType => {
@@ -96,7 +97,14 @@ export const usersReducer = (state = initialState, action: ActionTypes): UsersRe
                 users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: !el.followed} : el)
             }
         case "SET-USERS":
-            return {...state, users: action.payload.users,followingInProgress:false}
+            return {
+                ...state, users: action.payload.users.map(el => {
+                    return {
+                        ...el,
+                        followingInProgress: false
+                    }
+                })
+            }
         case "SET-TOTAL-COUNT":
             return {...state, totalCount: action.payload.totalCount}
         case "SET-CURRENT-PAGE":
@@ -104,11 +112,41 @@ export const usersReducer = (state = initialState, action: ActionTypes): UsersRe
         case "CHANGE-IS-FETCHING":
             return {...state, isFetching: action.payload.isFetching}
         case "TOGGLE-FOLLOWING-IN-PROGRESS":
-            return {...state, followingInProgress: action.payload.following}
+            return {
+                ...state, users: state.users.map(user => user.id === action.payload.userID ?
+                    {...user, followingInProgress: action.payload.following} : user)
+            }
         default:
             break;
     }
     return {...state}
 }
 
+export const getUsersThunkCreator = (page: number, usersCountOnPage: number) => (dispatch: Dispatch) => {
+    if (initialState.users.length === 0) {
+        dispatch(toggleIsFetchingAC(true))
+        usersAPI.getUsers(page, usersCountOnPage).then(data => {
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalCountAC(data.totalCount))
+            dispatch(toggleIsFetchingAC(false))
+        })
+    }
+    dispatch(setCurrentPageAC(page))
+    dispatch(toggleIsFetchingAC(true))
+    usersAPI.getUsers(page, usersCountOnPage).then(data => {
+        dispatch(toggleIsFetchingAC(false))
+        dispatch(setUsersAC(data.items))
+    })
+
+}
+
+export const changeFollowThunkCreator = (userID: number,followed: boolean)=>(dispatch:Dispatch) => {
+    dispatch(toggleFollowingInProgressAC(userID,true))
+    usersAPI.changeFollowed(userID, followed).then(resultCode => {
+        if (resultCode === 0) {
+            dispatch(followAC(userID))
+            dispatch(toggleFollowingInProgressAC(userID,false))
+        }
+    })
+}
 
