@@ -10,6 +10,7 @@ const ProfileInfo = (props:ProfileInfoPropsType) => {
         <div className={style.profileInfo}>
             <img src={props.userProfile.photos?.small} alt=""/>
             <div className={style.p}> {props.userProfile.aboutMe}</div>
+            <span> {props.userProfile.fullName} </span>
         </div>
     );
 };
