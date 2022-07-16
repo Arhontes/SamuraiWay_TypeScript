@@ -2,6 +2,7 @@ import React from 'react';
 import User from "./User/User";
 import s from "./users.module.css";
 import {UserType} from "../../Redux/reducers/users-reducer";
+import axios from "axios";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -10,7 +11,7 @@ type UsersPropsType = {
     changeFollowed: (userID: number) => void
     totalCount: number
     usersCountOnPage: number
-    isFetching:boolean
+    isFetching: boolean
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -26,6 +27,27 @@ export const Users = (props: UsersPropsType) => {
     let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
     let curPL = curP + 5;
     let slicedPages = pages.slice(curPF, curPL);
+
+    const changeFollowHandler = (followed: boolean, userID: number) => {
+        if (followed) {
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {
+                withCredentials: true, headers: {
+                    "API-KEY": "254c5ae8-a015-4ee0-8444-e1c6290e2b9d"
+                }
+            }).then(response => {
+                if (response.data.resultCode === 0) props.changeFollowed(userID)
+            })
+        } else {
+            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {}, {
+                withCredentials: true, headers: {
+                    "API-KEY": "254c5ae8-a015-4ee0-8444-e1c6290e2b9d"
+                }
+            }).then(response => {
+                if (response.data.resultCode === 0) props.changeFollowed(userID)
+            })
+        }
+    }
+
     return (
 
         <div>
@@ -34,7 +56,7 @@ export const Users = (props: UsersPropsType) => {
                                            onClick={() => props.getNewPage(page)}>{page}</span>)}
             {props.users.map(el =>
                 <User id={el.id}
-                      changeFollow={props.changeFollowed}
+                      changeFollow={changeFollowHandler}
                       followed={el.followed}
                       name={el.name}
                       status={el.status}

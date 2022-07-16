@@ -9,7 +9,7 @@ class UserClass extends Component<UsersClassPropsType, {}> {
 
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCountOnPage}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCountOnPage}`,{withCredentials:true})
                 .then(response => {
                     this.props.setUsers(response.data.items)
                     this.props.setTotalCount(response.data.totalCount)
@@ -21,7 +21,7 @@ class UserClass extends Component<UsersClassPropsType, {}> {
     getNewPage = (page: number) => {
         this.props.setCurrentPage(page)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCountOnPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCountOnPage}`,{withCredentials:true})
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
