@@ -2,15 +2,15 @@ import React from 'react';
 import {UserType} from "../../../Redux/reducers/users-reducer";
 import s from "./user.module.css"
 import {NavLink} from "react-router-dom";
-type UserPropsType = UserType&{
-    changeFollow:(id:number)=>void
+
+type UserPropsType = UserType & {
+    changeFollow: (followed: boolean, userID: number) => void
 }
-function User(props:UserPropsType) {
-    const changeFollowHandler = ()=>{
-        props.changeFollow(props.id)
-    }
-   let imgSource = props.photos.small
-    if (imgSource===null) imgSource = "https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png"
+
+function User(props: UserPropsType) {
+    let imgSource = props.photos.small
+    if (imgSource === null) imgSource = "https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png"
+
     return (
         <div className={s.userContainer}>
             <div className={s.icoWithButton}>
@@ -18,7 +18,8 @@ function User(props:UserPropsType) {
                     <img src={imgSource} alt=""/>
                 </NavLink>
 
-                <button onClick={changeFollowHandler}>{props.followed?"Unfollow":"Follow"}</button>
+                <button
+                    onClick={() => props.changeFollow(props.followed, props.id)}>{props.followed ? "Unfollow" : "Follow"}</button>
             </div>
             <div>
                 <div>{props.name}</div>
