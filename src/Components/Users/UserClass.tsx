@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import {UsersClassPropsType} from "./UsersContainer";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
+
 class UserClass extends Component<UsersClassPropsType, {}> {
 
     componentDidMount() {
-
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCountOnPage}`,{withCredentials:true})
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                    this.props.setTotalCount(response.data.totalCount)
+            usersAPI.getUsers(this.props.currentPage, this.props.usersCountOnPage).then(data => {
+                    this.props.setUsers(data.items)
+                    this.props.setTotalCount(data.totalCount)
                     this.props.toggleIsFetching(false)
                 })
         }
@@ -21,10 +20,9 @@ class UserClass extends Component<UsersClassPropsType, {}> {
     getNewPage = (page: number) => {
         this.props.setCurrentPage(page)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCountOnPage}`,{withCredentials:true})
-            .then(response => {
+        usersAPI.getUsers(page, this.props.usersCountOnPage).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 

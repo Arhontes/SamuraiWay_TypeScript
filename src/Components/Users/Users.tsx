@@ -3,6 +3,7 @@ import User from "./User/User";
 import s from "./users.module.css";
 import {UserType} from "../../Redux/reducers/users-reducer";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -29,23 +30,9 @@ export const Users = (props: UsersPropsType) => {
     let slicedPages = pages.slice(curPF, curPL);
 
     const changeFollowHandler = (followed: boolean, userID: number) => {
-        if (followed) {
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {
-                withCredentials: true, headers: {
-                    "API-KEY": "254c5ae8-a015-4ee0-8444-e1c6290e2b9d"
-                }
-            }).then(response => {
-                if (response.data.resultCode === 0) props.changeFollowed(userID)
-            })
-        } else {
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {}, {
-                withCredentials: true, headers: {
-                    "API-KEY": "254c5ae8-a015-4ee0-8444-e1c6290e2b9d"
-                }
-            }).then(response => {
-                if (response.data.resultCode === 0) props.changeFollowed(userID)
-            })
-        }
+        usersAPI.changeFollowed(userID, followed).then(resultCode => {
+            if (resultCode === 0) props.changeFollowed(userID)
+        })
     }
 
     return (
