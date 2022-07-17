@@ -1,24 +1,17 @@
 import React, {Component, Dispatch} from 'react';
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
-import {setAuthUserDataAC} from "../../Redux/reducers/auth-reducer";
+import {authReducerThunkCreator, setAuthUserDataAC} from "../../Redux/reducers/auth-reducer";
 
 class HeaderClass extends Component<HeaderPropsType, {}> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then(response => {
-            if (response.data.resultCode === 0) {
-                this.props.setAuthUserData(response.data.data)
-            }
-        })
+        this.props.authMe()
     }
 
     render() {
         return (
-
                 <Header isAuth={this.props.isAuth}/>
-
         );
     }
 }
@@ -32,6 +25,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 type HeaderPropsType = MapStatePropsType&{
     setAuthUserData: typeof setAuthUserDataAC
+    authMe:()=>void
 }
 
-export const HeaderContainer = connect(mapStateToProps, {setAuthUserData: setAuthUserDataAC})(HeaderClass)
+export const HeaderContainer = connect(mapStateToProps, {setAuthUserData: setAuthUserDataAC,
+    authMe:authReducerThunkCreator})(HeaderClass)
