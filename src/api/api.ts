@@ -1,4 +1,5 @@
 import axios from "axios";
+import {Params} from "react-router-dom";
 
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -18,8 +19,19 @@ export const usersAPI = {
         return instance.post(`follow/${userID}`, {})
             .then(response => response.data.resultCode)
     }
-
 }
+export const headerAPI = {
+    setAuthData: () => {
+        return instance.get(`auth/me`).then(response => response.data)
+    }
+}
+export const profilePageAPI = {
+    getUserProfile: (params: Readonly<Params<string>>) => {
+        return instance.get(`/profile/${params["*"]}`)
+            .then(response => response.data)
+    }
+}
+
 
 
 
