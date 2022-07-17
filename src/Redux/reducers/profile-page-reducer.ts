@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import axios from "axios";
+import {profilePageAPI} from "../../api/api";
+import {Params} from "react-router-dom";
+
 export const ADD_POST = "ADD-POST"
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 
@@ -106,3 +111,10 @@ let emptyObject = {
 
 }
 
+export const profilePageThunkCreator=(params: Readonly<Params<string>>)=>(dispatch:Dispatch)=>{
+    profilePageAPI.getUserProfile(params).then((data)=>{
+        dispatch(setUserProfileAC(data))
+    })
+
+
+}
