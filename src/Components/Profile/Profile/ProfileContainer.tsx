@@ -1,17 +1,18 @@
 import {PostType} from "../../../Redux/store";
 import {AppStateType} from "../../../Redux/redux-store";
 import {connect} from "react-redux";
-import {profilePageThunkCreator, setUserProfileAC, UserProfileType} from "../../../Redux/reducers/profile-page-reducer";
+import {profilePageThunkCreator,UserProfileType} from "../../../Redux/reducers/profile-page-reducer";
 import React, {useEffect} from "react";
-import axios from "axios";
+
 import {Profile} from "./Profile";
-import {Params, useParams} from "react-router-dom";
-import {profilePageAPI} from "../../../api/api";
+import {Navigate, Params, useParams} from "react-router-dom";
+;
 
 
 type MapStatePropsType = {
     posts: Array<PostType>
     userProfile: UserProfileType | null
+    isAuth:boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (params: Readonly<Params<string>>) => void
@@ -21,6 +22,7 @@ export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
+        isAuth:state.auth.isAuth,
         posts: state.profilePage.posts,
         userProfile: state.profilePage.userProfile
     }
@@ -33,6 +35,7 @@ export function ProfileWrapper(props: ProfilePropsType) {
         props.getUserProfile(params)
     }, [])
 
+    if(!props.isAuth) return <Navigate to={"/login"}/>
     return (
         <Profile {...props}/>
     )
