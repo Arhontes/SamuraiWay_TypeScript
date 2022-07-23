@@ -5,11 +5,8 @@ import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import NewPostContainer from "../MyPosts/NewPost/NewPostContainer";
 import {ProfilePropsType} from "./ProfileContainer";
 import {Preloader} from "../../Common/Preloader/Preloader";
-import {Navigate} from "react-router-dom";
 
 export const Profile = (props:ProfilePropsType) => {
-
-
     return (
         <div className={p.content}>
             <div className={p.wallpaper}>

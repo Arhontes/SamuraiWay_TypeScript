@@ -3,11 +3,9 @@ import {AppStateType} from "../../../Redux/redux-store";
 import {connect} from "react-redux";
 import {profilePageThunkCreator,UserProfileType} from "../../../Redux/reducers/profile-page-reducer";
 import React, {useEffect} from "react";
-
 import {Profile} from "./Profile";
-import {Navigate, Params, useParams} from "react-router-dom";
-;
-
+import { Params, useParams} from "react-router-dom";
+import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 
 type MapStatePropsType = {
     posts: Array<PostType>
@@ -22,24 +20,26 @@ export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        isAuth:state.auth.isAuth,
         posts: state.profilePage.posts,
-        userProfile: state.profilePage.userProfile
+        userProfile: state.profilePage.userProfile,
+        isAuth:state.auth.isAuth
     }
 }
 
-export function ProfileWrapper(props: ProfilePropsType) {
+export const ProfileWrapper = (props: ProfilePropsType)=>{
+    debugger
+
     let params = useParams();
     if (params["*"]==='') params={"*":"2"}
     useEffect(() => {
         props.getUserProfile(params)
     }, [])
 
-    if(!props.isAuth) return <Navigate to={"/login"}/>
     return (
         <Profile {...props}/>
     )
 
 }
 
-export const ProfileContainer = connect(mapStateToProps, {getUserProfile: profilePageThunkCreator,})(ProfileWrapper)
+export const ProfileContainer = connect(mapStateToProps, {getUserProfile: profilePageThunkCreator,})(withAuthRedirect(ProfileWrapper))
+

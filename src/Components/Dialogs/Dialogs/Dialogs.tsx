@@ -6,7 +6,7 @@ import { MessageType, UserType} from "../../../Redux/store";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/redux-store";
 import {Dispatch} from "redux";
-import {Navigate} from "react-router-dom";
+import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 
 
 export const Dialogs = (props:DialogsPropsType) => {
@@ -18,7 +18,6 @@ export const Dialogs = (props:DialogsPropsType) => {
         el.key==='Enter'&&alert(`I gonna add newMessage ${text}` )
 
     }
-    if(!props.isAuth) return <Navigate to={"/login"}/>
     return (
         <div className={d.two_column}>
 
@@ -37,7 +36,6 @@ export const Dialogs = (props:DialogsPropsType) => {
 type MapStatePropsType={
     users:Array<UserType>
     messages:Array<MessageType>
-    isAuth:boolean
 }
 type MapDispatchPropsType = {
 
@@ -47,7 +45,6 @@ let mapStateToProps = (state:AppStateType):MapStatePropsType=>{
     return{
         users: state.dialogsPage.users,
         messages:state.dialogsPage.messages,
-        isAuth:state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch:Dispatch)=>{
@@ -55,4 +52,5 @@ let mapDispatchToProps = (dispatch:Dispatch)=>{
 
     }
 }
+const AuthRedirectComponent = withAuthRedirect(Dialogs)
 export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
