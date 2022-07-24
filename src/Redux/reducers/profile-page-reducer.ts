@@ -13,12 +13,14 @@ type ProfilePageType = {
     posts: Array<PostType>
     newPost: PostType
     userProfile:UserProfileType | null
+    status:string
 }
 //ActionTypes
 export type ActionTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof setUserProfileAC>
+    ReturnType<typeof setUserProfileAC>|
+    ReturnType<typeof setProfileStatusAC>
 
 //Action creator
 export const addPostAC = (text: string) => {
@@ -62,7 +64,14 @@ export const setUserProfileAC = (userProfile: UserProfileType) => {
         }
     } as const
 }
-
+export const setProfileStatusAC = (status:string)=>{
+    return{
+        type:"SET-USER-PROFILE-STATUS",
+        payload:{
+            status
+        }
+    } as const
+}
 let initialState: ProfilePageType = {
     posts: [
         {id: 1, text: "my first post"},
@@ -71,6 +80,7 @@ let initialState: ProfilePageType = {
     ],
     newPost: {id: 323, text: ''},
     userProfile: null,
+    status:""
 }
 export const profilePageReducer = (state = initialState, action: ActionTypes): ProfilePageType => {
     switch (action.type) {
@@ -83,6 +93,8 @@ export const profilePageReducer = (state = initialState, action: ActionTypes): P
             return {...state, newPost: {...state.newPost, text: action.updatedText}}
         case "SET-USER-PROFILE":
             return {...state,userProfile:action.payload.userProfile}
+        case"SET-USER-PROFILE-STATUS":
+            return {...state, status:action.payload.status}
         default:
             break;
     }
@@ -111,10 +123,15 @@ let emptyObject = {
 
 }
 
-export const profilePageThunkCreator=(params: Readonly<Params<string>>)=>(dispatch:Dispatch)=>{
+export const getUserProfileThunkCreator=(params: Readonly<Params<string>>)=>(dispatch:Dispatch)=>{
     profilePageAPI.getUserProfile(params).then((data)=>{
         dispatch(setUserProfileAC(data))
+    })}
+export const getUserStatusThunkCreator = (params: Readonly<Params<string>>)=>(dispatch:Dispatch)=>{
+    profilePageAPI.getUserStatus(params).then((status)=>{
+        debugger
+        if (status)dispatch(setProfileStatusAC(status))
+        else dispatch(setProfileStatusAC(""))
+
     })
-
-
 }
