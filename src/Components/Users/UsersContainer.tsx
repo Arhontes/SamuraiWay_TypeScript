@@ -8,6 +8,8 @@ import {AppStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import UserClass from "./UserClass";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
+import {ComponentType} from "react";
 
 type MapStatePropsType = {
     users: Array<UserType>
@@ -53,7 +55,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {
 }*/
 const AuthRedirectComponent = withAuthRedirect(UserClass)
 
-export const UsersContainer = connect(mapStateToProps, {
-    changeFollowed: changeFollowThunkCreator,
-    getUsers: getUsersThunkCreator
-})(AuthRedirectComponent)
+export const UsersContainer = compose<ComponentType>(
+    connect(mapStateToProps, {changeFollowed: changeFollowThunkCreator, getUsers: getUsersThunkCreator}),
+    withAuthRedirect
+)(UserClass)

@@ -6,6 +6,7 @@ import React, {useEffect} from "react";
 import {Profile} from "./Profile";
 import { Params, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     posts: Array<PostType>
@@ -41,5 +42,8 @@ export const ProfileWrapper = (props: ProfilePropsType)=>{
 
 }
 
-export const ProfileContainer = connect(mapStateToProps, {getUserProfile: profilePageThunkCreator,})(withAuthRedirect(ProfileWrapper))
+export const ProfileContainer = compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {getUserProfile: profilePageThunkCreator}),
+)(ProfileWrapper)
 

@@ -3,6 +3,7 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
 import {authReducerThunkCreator, setAuthUserDataAC} from "../../Redux/reducers/auth-reducer";
+import {compose} from "redux";
 
 class HeaderClass extends Component<HeaderPropsType, {}> {
     componentDidMount() {
@@ -11,22 +12,29 @@ class HeaderClass extends Component<HeaderPropsType, {}> {
 
     render() {
         return (
-                <Header isAuth={this.props.isAuth}/>
+            <Header isAuth={this.props.isAuth}/>
         );
     }
 }
+
 type MapStatePropsType = {
-    isAuth:boolean
+    isAuth: boolean
 }
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        isAuth:state.auth.isAuth
+        isAuth: state.auth.isAuth
     }
 }
-type HeaderPropsType = MapStatePropsType&{
+type HeaderPropsType = MapStatePropsType & {
     setAuthUserData: typeof setAuthUserDataAC
-    authMe:()=>void
+    authMe: () => void
 }
 
-export const HeaderContainer = connect(mapStateToProps, {setAuthUserData: setAuthUserDataAC,
-    authMe:authReducerThunkCreator})(HeaderClass)
+
+export const HeaderContainer = compose(
+    connect(mapStateToProps, {
+        setAuthUserData: setAuthUserDataAC,
+        authMe: authReducerThunkCreator
+    })
+)(HeaderClass)
+

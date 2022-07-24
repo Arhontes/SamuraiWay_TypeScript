@@ -1,11 +1,11 @@
-import React, {createRef} from 'react';
+import React, {ComponentType, createRef} from 'react';
 import d from './Dialogs.module.css'
 import {User} from "../User/User";
 import Message from "../Message/Message";
 import { MessageType, UserType} from "../../../Redux/store";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 
 
@@ -52,5 +52,8 @@ let mapDispatchToProps = (dispatch:Dispatch)=>{
 
     }
 }
-const AuthRedirectComponent = withAuthRedirect(Dialogs)
-export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+
+export const DialogsContainer = compose<ComponentType>(
+    connect(mapStateToProps,mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);
