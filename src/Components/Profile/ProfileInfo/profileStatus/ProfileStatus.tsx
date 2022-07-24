@@ -1,33 +1,37 @@
 import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
 type ProfileStatusPropsType = {
     status:string
+    updateUserStatus:(status:string)=>void
 }
 
 export function ProfileStatus(props: ProfileStatusPropsType) {
-    const [text, setText] = useState<string>(props.status)
+    const [localUserStatus, setLocalUserStatus] = useState<string>(props.status)
     const [editMode, setEditMode] = useState(false)
     const onEnterHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
+            props.updateUserStatus(localUserStatus)
             setEditMode(false)
-            setText(text)
         }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setText(e.currentTarget.value)
+        setLocalUserStatus(e.currentTarget.value)
     }
-
-
+    const onBlurHandler = () =>{
+        props.updateUserStatus(localUserStatus)
+        setEditMode(!editMode)
+    }
+    const textStatus = props.status!==""?props.status:"no status here"
     return (
         <>
             {!editMode ?
                 <div>
-                    <span onDoubleClick={() => setEditMode(true)}>{text}</span>
+                    <span onDoubleClick={() => setEditMode(true)}>{textStatus}</span>
                 </div> :
                 <input autoFocus={true}
-                       value={text}
+                       value={localUserStatus}
                        onKeyPress={onEnterHandler}
-                       onBlur={() => setEditMode(!editMode)}
+                       onBlur={onBlurHandler}
                        type="text"
                        onChange={onChangeHandler}/>}
         </>
