@@ -33,7 +33,9 @@ export const profilePageAPI = {
     getUserStatus:(params: Readonly<Params<string>>)=> {
         return instance.get(`/profile/status/${params["*"]}`).then(response => response.data)
     },
-    
+    updateUserStatus:(status:string)=>{
+        return instance.put(`/profile/status/`,{status})
+    }
 }
 
 
