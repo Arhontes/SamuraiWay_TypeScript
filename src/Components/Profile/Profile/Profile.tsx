@@ -11,7 +11,7 @@ export const Profile = (props:ProfilePropsType) => {
 
     return (
         <div className={p.content}>
-            {props.status!==""?<ProfileStatus status={props.status}/>:"no status here"}
+            <ProfileStatus updateUserStatus={props.updateUserStatus} status={props.status}/>
             {props.userProfile?<ProfileInfo userProfile={props.userProfile}/>:<Preloader/>}
             <NewPostContainer />
             <MyPosts posts={props.posts} />

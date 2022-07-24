@@ -3,14 +3,14 @@ import {AppStateType} from "../../../Redux/redux-store";
 import {connect} from "react-redux";
 import {
     getUserProfileThunkCreator,
-    getUserStatusThunkCreator,
+    getUserStatusThunkCreator, updateUserStatus,
     UserProfileType
 } from "../../../Redux/reducers/profile-page-reducer";
 import React, {useEffect} from "react";
 import {Profile} from "./Profile";
 import {Params, useParams} from "react-router-dom";
-import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 
 type MapStatePropsType = {
     posts: Array<PostType>
@@ -21,6 +21,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     getUserProfile: (params: Readonly<Params<string>>) => void
     getUserStatus: (params: Readonly<Params<string>>) => void
+    updateUserStatus:(status:string)=>void
 }
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -34,13 +35,13 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export const ProfileWrapper = (props: ProfilePropsType) => {
-    debugger
+
     let params = useParams();
-    if (params["*"] === '') params = {"*": "2"}
+    if (params["*"] === '') params = {"*": "24544"}
     useEffect(() => {
         props.getUserProfile(params)
         props.getUserStatus(params)
-    }, [params])
+    }, [])
 
     return (
         <Profile {...props}/>
@@ -49,9 +50,8 @@ export const ProfileWrapper = (props: ProfilePropsType) => {
 }
 
 export const ProfileContainer = compose<React.ComponentType>(
-    // withAuthRedirect,
     connect(
         mapStateToProps,
-        {getUserProfile: getUserProfileThunkCreator, getUserStatus: getUserStatusThunkCreator}),)
+        {getUserProfile: getUserProfileThunkCreator, getUserStatus: getUserStatusThunkCreator,updateUserStatus:updateUserStatus}),)
 (ProfileWrapper)
 

@@ -27,14 +27,14 @@ export const headerAPI = {
 }
 export const profilePageAPI = {
     getUserProfile: (params: Readonly<Params<string>>) => {
-        return instance.get(`/profile/${params["*"]}`)
+        return instance.get(`profile/${params["*"]}`)
             .then(response => response.data)
     },
     getUserStatus:(params: Readonly<Params<string>>)=> {
-        return instance.get(`/profile/status/${params["*"]}`).then(response => response.data)
+        return instance.get(`profile/status/${params["*"]}`).then(response => response.data)
     },
     updateUserStatus:(status:string)=>{
-        return instance.put(`/profile/status/`,{status})
+        return instance.put(`profile/status`,{status})
     }
 }
 

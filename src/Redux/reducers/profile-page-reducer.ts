@@ -129,9 +129,14 @@ export const getUserProfileThunkCreator=(params: Readonly<Params<string>>)=>(dis
     })}
 export const getUserStatusThunkCreator = (params: Readonly<Params<string>>)=>(dispatch:Dispatch)=>{
     profilePageAPI.getUserStatus(params).then((status)=>{
-        debugger
         if (status)dispatch(setProfileStatusAC(status))
         else dispatch(setProfileStatusAC(""))
 
     })
+}
+export const updateUserStatus = (status:string) =>(dispatch:Dispatch)=>{
+    profilePageAPI.updateUserStatus(status).then(response=>{
+        if(response.data.resultCode ===0){dispatch(setProfileStatusAC(status))}
+    })
+
 }
