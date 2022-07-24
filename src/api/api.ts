@@ -29,7 +29,11 @@ export const profilePageAPI = {
     getUserProfile: (params: Readonly<Params<string>>) => {
         return instance.get(`/profile/${params["*"]}`)
             .then(response => response.data)
-    }
+    },
+    getUserStatus:(params: Readonly<Params<string>>)=> {
+        return instance.get(`/profile/status/${params["*"]}`).then(response => response.data)
+    },
+    
 }
 
 
