@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {UsersClassPropsType} from "./UsersContainer";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
+
 
 class UserClass extends Component<UsersClassPropsType, {}> {
 
