@@ -43,7 +43,7 @@ export const ProfileWrapper = (props: ProfilePropsType)=>{
 }
 
 export const ProfileContainer = compose<React.ComponentType>(
-    withAuthRedirect,
+    // withAuthRedirect,
     connect(mapStateToProps, {getUserProfile: profilePageThunkCreator}),
 )(ProfileWrapper)
 
