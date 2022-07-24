@@ -1,7 +1,10 @@
 import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+type ProfileStatusPropsType = {
+    status:string
+}
 
-export function ProfileStatus(props: any) {
-    const [text, setText] = useState<string>("some status here")
+export function ProfileStatus(props: ProfileStatusPropsType) {
+    const [text, setText] = useState<string>(props.status)
     const [editMode, setEditMode] = useState(false)
     const onEnterHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -13,6 +16,7 @@ export function ProfileStatus(props: any) {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.currentTarget.value)
     }
+
 
     return (
         <>
