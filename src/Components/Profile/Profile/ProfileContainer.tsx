@@ -35,10 +35,12 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export const ProfileWrapper = (props: ProfilePropsType) => {
-
+    console.log(" rendering ProfileWrapper")
+    console.log(" ProfileWrapper = " + props.status)
     let params = useParams();
     if (params["*"] === '') params = {"*": "24544"}
     useEffect(() => {
+        console.log("start" + "getUserProfile getUserStatus")
         props.getUserProfile(params)
         props.getUserStatus(params)
     }, [])

@@ -1,11 +1,16 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, useEffect, useState} from 'react';
 type ProfileStatusPropsType = {
     status:string
     updateUserStatus:(status:string)=>void
 }
 
 export function ProfileStatus(props: ProfileStatusPropsType) {
+    console.log("rendering ProfileStatus")
     const [localUserStatus, setLocalUserStatus] = useState<string>(props.status)
+    useEffect(()=>{
+        setLocalUserStatus(props.status)
+    }, [props.status])
+    console.log("localUserStatus" + localUserStatus)
     const [editMode, setEditMode] = useState(false)
     const onEnterHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
